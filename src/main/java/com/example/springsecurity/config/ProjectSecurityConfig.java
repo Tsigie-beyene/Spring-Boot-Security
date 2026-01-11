@@ -4,6 +4,7 @@ import org.springframework.boot.security.autoconfigure.web.servlet.SecurityFilte
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.authentication.password.CompromisedPasswordChecker;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +14,7 @@ import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.password.HaveIBeenPwnedRestApiPasswordChecker;
 
 import static org.springframework.security.config.Customizer.withDefaults;
 
@@ -34,8 +36,8 @@ class ProjectSecurityConfig {
     @Bean
     public UserDetailsService userDetailsService(){
 //        UserDetails user= User.withUsername("user").password("{noop}12345").authorities("read").build();
-        UserDetails user= User.withUsername("user").password("{noop}12345").authorities("read").build();
-        UserDetails admin= User.withUsername("admin").password("{bcrypt}$2a$12$gamqpWF8lnCrtVUiEgXSoOUMOuUGMJIKm6loRSIR24CO.7BkieC4i").authorities("admin").build();
+        UserDetails user= User.withUsername("user").password("{noop}UserTsigie@12345").authorities("read").build();
+        UserDetails admin= User.withUsername("admin").password("{bcrypt}$2a$12$7m1vHikebUfZIOHptrML3O/C.9LyW2QZwFwMJpIBVmQaTC2XvVi2C").authorities("admin").build();
 
         return new InMemoryUserDetailsManager(user,admin);
     }
@@ -43,6 +45,11 @@ class ProjectSecurityConfig {
     public PasswordEncoder passwordEncoder(){
 //        return new BCryptPasswordEncoder();
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    public CompromisedPasswordChecker compromisedPasswordChecker(){
+        return new HaveIBeenPwnedRestApiPasswordChecker();
     }
 }
 
