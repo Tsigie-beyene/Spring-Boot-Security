@@ -10,7 +10,7 @@ INSERT IGNORE INTO `authorities` VALUES ('admin','admin')
 CREATE TABLE `customer` (
                             `id` int NOT NULL AUTO_INCREMENT,
                             `email` varchar(45) NOT NULL,
-                            `pwd` varchar(200) NOT NULL,
+                            `pwd` varchar(255) NOT NULL,
                             `role` varchar(45) NOT NULL,
                             PRIMARY KEY (`id`)
 );
