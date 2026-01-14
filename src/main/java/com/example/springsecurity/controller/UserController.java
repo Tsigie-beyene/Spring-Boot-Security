@@ -35,7 +35,7 @@ public class UserController {
         }
         catch(Exception ex) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).
-                    body("An exception occured"+ ex.getMessage());
+                    body("An exception occurred"+ ex.getMessage());
 
         }
 
