@@ -21,7 +21,7 @@ class ProjectSecurityProdConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) {
 //        http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
 //        http.authorizeHttpRequests((requests) -> requests.anyRequest().denyAll());
-        http.sessionManagement(cmc->cmc.invalidSessionUrl("/invalidSession"));
+        http.sessionManagement(cmc->cmc.invalidSessionUrl("/invalidSession").maximumSessions(1).maxSessionsPreventsLogin(true));
         http.redirectToHttps(withDefaults());
         http.csrf(csrfConfig -> csrfConfig.disable());
 //        http.csrf(AbstractHttpConfigurer::disable);
