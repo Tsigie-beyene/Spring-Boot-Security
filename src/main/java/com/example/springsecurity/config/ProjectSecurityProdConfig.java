@@ -19,6 +19,7 @@ class ProjectSecurityProdConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) {
 //        http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
 //        http.authorizeHttpRequests((requests) -> requests.anyRequest().denyAll());
+        http.redirectToHttps(withDefaults());
         http.csrf(csrfConfig -> csrfConfig.disable());
 //        http.csrf(AbstractHttpConfigurer::disable);
 
