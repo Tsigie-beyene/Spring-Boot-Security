@@ -21,12 +21,13 @@ class ProjectSecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) {
 //        http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
 //        http.authorizeHttpRequests((requests) -> requests.anyRequest().denyAll());
+        http.sessionManagement(cmc->cmc.invalidSessionUrl("/invalidSession"));
         http.csrf(csrfConfig -> csrfConfig.disable());
 //        http.csrf(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests((requests) -> requests
                         .requestMatchers("/myAccounts","/myBalance","/myLoans","/myCards").authenticated()
-                        .requestMatchers("/notices","/contact","/error","/register").permitAll());
+                        .requestMatchers("/notices","/contact","/error","/register","/invalidSession").permitAll());
 //        http.formLogin(flc-> flc.disable());
         http.formLogin(withDefaults());
 //        http.httpBasic(withDefaults());
