@@ -1,5 +1,6 @@
 package com.example.springsecurity.config;
 
+import com.example.springsecurity.exceptionhandling.CustomBasicAuthenticationEntryPoint;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -27,7 +28,9 @@ class ProjectSecurityConfig {
                         .requestMatchers("/notices","/contact","/error","/register").permitAll());
 //        http.formLogin(flc-> flc.disable());
         http.formLogin(withDefaults());
-        http.httpBasic(withDefaults());
+//        http.httpBasic(withDefaults());
+        http.httpBasic(hbc->hbc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint()));
+//        http.exceptionHandling(ehc-> ehc.authenticationEntryPoint(new CustomBasicAuthenticationEntryPoint())); //It is a Global config
         return http.build();
 
     }
