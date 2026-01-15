@@ -13,8 +13,8 @@ import org.springframework.security.web.authentication.password.HaveIBeenPwnedRe
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
-@Profile("!prod")
-class ProjectSecurityConfig {
+@Profile("prod")
+class ProjectSecurityProdConfig {
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) {
 //        http.authorizeHttpRequests((requests) -> requests.anyRequest().permitAll());
