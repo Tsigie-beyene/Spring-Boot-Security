@@ -26,7 +26,7 @@ class ProjectSecurityConfig {
 //        http.csrf(AbstractHttpConfigurer::disable);
 
         http.authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/myAccounts","/myBalance","/myLoans","/myCards").authenticated()
+                        .requestMatchers("/myAccounts","/myBalance","/myLoans","/myCards","/user").authenticated()
                         .requestMatchers("/notices","/contact","/error","/register","/invalidSession").permitAll());
 //        http.formLogin(flc-> flc.disable());
         http.formLogin(withDefaults());

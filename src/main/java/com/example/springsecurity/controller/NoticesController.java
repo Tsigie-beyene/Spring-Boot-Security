@@ -1,13 +1,29 @@
 package com.example.springsecurity.controller;
 
+import com.example.springsecurity.model.Notice;
+import com.example.springsecurity.repository.NoticeRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.CacheControl;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-class NoticesController {
-    @GetMapping("/notices")
-    public String getNotices(){
-        return "here are the notice details from the DB";
+import java.util.List;
 
+@RestController
+@RequiredArgsConstructor
+class NoticesController {
+    private final NoticeRepository noticeRepository;
+
+    @GetMapping("/notices")
+    public ResponseEntity<List<Notice>> getNotices() {
+        List<Notice> notices = noticeRepository.findAllActiveNotices();
+        if (notices != null) {
+            return ResponseEntity.ok()
+                    .cacheControl(CacheControl.maxAge(60, TimeUnit.SECONDS))
+                    .body(notices);
+        } else {
+            return null;
+        }
     }
 }
