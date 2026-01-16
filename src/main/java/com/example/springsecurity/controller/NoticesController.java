@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.Duration;
 import java.util.List;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -20,7 +22,7 @@ class NoticesController {
         List<Notice> notices = noticeRepository.findAllActiveNotices();
         if (notices != null) {
             return ResponseEntity.ok()
-                    .cacheControl(CacheControl.maxAge(60, TimeUnit.SECONDS))
+                    .cacheControl(CacheControl.maxAge(Duration.ofSeconds(60)))
                     .body(notices);
         } else {
             return null;
