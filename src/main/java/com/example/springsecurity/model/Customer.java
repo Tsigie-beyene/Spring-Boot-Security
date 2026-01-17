@@ -16,8 +16,15 @@ import java.util.Date;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name="customer_id")
     private Long id;
+
     private String email;
+
+    private String name;
+
+    @Column(name="mobile_number")
+    String mobileNumber;
 
     @Column(nullable = false, length = 255)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
