@@ -1,6 +1,6 @@
-package com.eazybytes.model;
+package com.example.springsecurity.model;
 
-import com.example.springsecurity.model.Customer;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

@@ -1,15 +1,74 @@
 
-docker command to run mysql in docker 
-docker run -p 3307:3306 --name springsecurity -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=bank -d mysql
+---
 
-user.ddl file: to create users sample for JDBC user manager implemntation class
+##  Spring Security Framework
 
-create table users(username varchar_ignorecase(50) not null primary key,password varchar_ignorecase(500) not null,enabled boolean not null);
-create table authorities (username varchar_ignorecase(50) not null,authority varchar_ignorecase(50) not null,constraint fk_authorities_users foreign key(username) references users(username));
-create unique index ix_auth_username on authorities (username,authority);
+### What is Spring Security?
 
-or this one 
+Spring Security is a **powerful and flexible security framework** for Java applications that provides:
 
-create table users(username varchar(50) not null primary key,password varchar(500) not null,enabled boolean not null);
-create table authorities (username varchar(50) not null,authority varchar(50) not null,constraint fk_authorities_users foreign key(username) references users(username));
-create unique index ix_auth_username on authorities (username,authority);
+- Authentication
+- Authorization
+- Protection against common attacks
+- Integration with OAuth2, OpenID Connect, LDAP, JWT, and more
+
+It is built around **filters, security contexts, and pluggable authentication mechanisms**.
+
+---
+
+## Spring Security Core Architecture
+
+Key internal components:
+- `SecurityFilterChain`
+- `DelegatingFilterProxy`
+- `AuthenticationManager`
+- `AuthenticationProvider`
+- `UserDetailsService`
+- `SecurityContextHolder`
+
+Every HTTP request passes through a **chain of security filters** before reaching application controllers.
+
+---
+
+## Authentication vs Authorization
+
+### Authentication
+> Verifies **who the user is**
+
+Examples:
+- Username & password login
+- JWT validation
+- OAuth2 login
+
+### Authorization
+> Determines **what the user is allowed to do**
+
+Examples:
+- Role-based access (`ROLE_ADMIN`)
+- Authority-based access (`READ_ACCOUNT`)
+
+| Aspect | Authentication | Authorization |
+|------|---------------|---------------|
+| Purpose | Identity verification | Access control |
+| Happens | At login | After authentication |
+| Spring API | AuthenticationManager | AccessDecisionManager |
+
+---
+
+## Password Management in Spring Security
+
+Spring Security **never stores plain text passwords**.
+
+### PasswordEncoders
+
+Recommended encoders:
+- `BCryptPasswordEncoder` ✅ (Best practice)
+- `SCryptPasswordEncoder`
+- `Argon2PasswordEncoder`
+
+Example:
+```java
+@Bean
+public PasswordEncoder passwordEncoder() {
+    return new BCryptPasswordEncoder();
+}

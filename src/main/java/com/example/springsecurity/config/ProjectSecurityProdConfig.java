@@ -46,6 +46,15 @@ class ProjectSecurityProdConfig {
                 }));
         http.redirectToHttps(withDefaults());
 
+        http.authorizeHttpRequests((requests) -> requests
+                //  .requestMatchers("/myAccounts","/myBalance","/myLoans","/myCards","/user").authenticated()
+
+                .requestMatchers("/myAccounts").hasAuthority("VIEWACCOUNT")
+                .requestMatchers("/myBalance").hasAnyAuthority("VIEWBALANCE", "VIEWACCOUNT")
+                .requestMatchers("/myLoans").hasAuthority("VIEWLOANS")
+                .requestMatchers("/myCards").hasAuthority("VIEWCARDS")
+                .requestMatchers("/user").authenticated()
+                .requestMatchers("/notices","/contact","/error","/register","/invalidSession").permitAll());
 
 
 //        http.csrf(csrfConfig -> csrfConfig.disable());

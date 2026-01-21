@@ -36,6 +36,6 @@ public class Customer {
 
     @OneToMany(mappedBy = "customer", fetch = FetchType.EAGER)
     @JsonIgnore
-    private Set<com.eazybytes.model.Authority> authorities;
+    private Set<Authority> authorities;
 
 }
