@@ -62,7 +62,7 @@ Spring Security **never stores plain text passwords**.
 ### PasswordEncoders
 
 Recommended encoders:
-- `BCryptPasswordEncoder` ✅ (Best practice)
+- `BCryptPasswordEncoder`  (Best practice)
 - `SCryptPasswordEncoder`
 - `Argon2PasswordEncoder`
 
