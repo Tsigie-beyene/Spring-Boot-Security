@@ -39,6 +39,7 @@ Examples:
 - Username & password login
 - JWT validation
 - OAuth2 login
+- keyclock
 
 ### Authorization
 > Determines **what the user is allowed to do**
