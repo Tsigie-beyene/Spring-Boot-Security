@@ -39,6 +39,7 @@ Examples:
 - Username & password login
 - JWT validation
 - OAuth2 login
+- keyclock
 
 ### Authorization
 > Determines **what the user is allowed to do**
@@ -62,7 +63,7 @@ Spring Security **never stores plain text passwords**.
 ### PasswordEncoders
 
 Recommended encoders:
-- `BCryptPasswordEncoder` ✅ (Best practice)
+- `BCryptPasswordEncoder`  (Best practice)
 - `SCryptPasswordEncoder`
 - `Argon2PasswordEncoder`
 
