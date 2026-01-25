@@ -1,4 +1,4 @@
-package com.eazybytes.filter;
+package com.example.springsecurity.filter;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
